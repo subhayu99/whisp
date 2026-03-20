@@ -11,6 +11,8 @@
     "withGlobalTauri": true,
     "windows": [
       {
+        "label": "setup",
+        "url": "index.html",
         "title": "Whisp Setup",
         "width": 540,
         "height": 720,
