@@ -206,7 +206,12 @@ fn extract_zip(data: &[u8], dest: &Path) -> Result<(), LlmError> {
             .by_index(i)
             .map_err(|e| LlmError::DownloadError(format!("Zip entry error: {}", e)))?;
 
-        if let Some(name) = file.enclosed_name().and_then(|p| p.file_name()) {
+        if let Some(name) = file
+            .enclosed_name()
+            .map(|p| p.to_path_buf())
+            .as_deref()
+            .and_then(|p| p.file_name())
+        {
             if name == "ollama.exe" {
                 let out_path = dest.join("ollama.exe");
                 let mut out_file = std::fs::File::create(&out_path)
