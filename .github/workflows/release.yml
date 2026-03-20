@@ -22,7 +22,7 @@ jobs:
             os: macos-latest
             artifact: whisp-macos-arm64
           - target: x86_64-apple-darwin
-            os: macos-13
+            os: macos-latest
             artifact: whisp-macos-x86_64
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
