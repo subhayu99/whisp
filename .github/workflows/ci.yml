@@ -28,7 +28,7 @@ jobs:
             libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev \
             libx11-dev libxdo-dev libxcb-randr0-dev libxcb-shape0-dev \
             libxcb-xfixes0-dev libxtst-dev libevdev-dev \
-            libpipewire-0.3-dev \
+            libpipewire-0.3-dev libgbm-dev libegl1-mesa-dev \
             patchelf
 
       - name: Check formatting
@@ -60,7 +60,7 @@ jobs:
             libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev \
             libx11-dev libxdo-dev libxcb-randr0-dev libxcb-shape0-dev \
             libxcb-xfixes0-dev libxtst-dev libevdev-dev \
-            libpipewire-0.3-dev \
+            libpipewire-0.3-dev libgbm-dev libegl1-mesa-dev \
             patchelf
 
       - name: Run tests

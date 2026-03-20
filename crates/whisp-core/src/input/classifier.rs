@@ -18,6 +18,12 @@ struct ClassifierState {
     window_start: Instant,
 }
 
+impl Default for KeystrokeClassifier {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl KeystrokeClassifier {
     pub fn new() -> Self {
         Self {

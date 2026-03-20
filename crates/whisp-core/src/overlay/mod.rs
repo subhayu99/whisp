@@ -9,6 +9,12 @@ pub struct OverlayManager {
     position: Option<CaretPosition>,
 }
 
+impl Default for OverlayManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl OverlayManager {
     pub fn new() -> Self {
         Self {

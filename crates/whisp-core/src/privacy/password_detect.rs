@@ -6,6 +6,12 @@
 /// - Windows: UIA → PasswordBox control type
 pub struct PasswordFieldDetector;
 
+impl Default for PasswordFieldDetector {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PasswordFieldDetector {
     pub fn new() -> Self {
         Self
