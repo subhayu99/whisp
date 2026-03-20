@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whisp — Setup</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .setup-card {
+      background: #16213e;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    h1 { font-size: 24px; margin-bottom: 8px; color: #fff; }
+    .subtitle { color: #8899aa; font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
+    .section-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #5dade2; margin-bottom: 8px;
+    }
+    .model-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .model-option {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 16px; border-radius: 10px;
+      border: 2px solid transparent; background: #0f3460;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .model-option:hover { border-color: #4a90d9; }
+    .model-option.selected { border-color: #5dade2; background: #1a4a7a; }
+    .model-option input { display: none; }
+    .model-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .model-name { font-weight: 600; color: #fff; }
+    .badge {
+      display: inline-block; padding: 1px 7px; border-radius: 4px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-vision { background: #2ecc71; color: #0a1929; }
+    .badge-text { background: #3498db; color: #fff; }
+    .badge-recommended { background: #f39c12; color: #0a1929; }
+    .model-stats {
+      display: flex; gap: 12px; font-size: 12px; color: #8899aa; margin-top: 2px;
+    }
+    .model-stats span { display: flex; align-items: center; gap: 3px; }
+    .model-desc { color: #6699bb; font-size: 12px; margin-top: 4px; line-height: 1.4; }
+    .vision-note {
+      font-size: 11px; color: #f39c12; margin-top: 2px; font-style: italic;
+    }
+    .custom-input {
+      width: 100%; padding: 10px 14px; border-radius: 8px;
+      border: 1px solid #2a4a6a; background: #0a1929; color: #fff;
+      font-size: 14px; margin-top: 8px; display: none;
+    }
+    .custom-input:focus { outline: none; border-color: #5dade2; }
+    .btn {
+      width: 100%; padding: 12px; border: none; border-radius: 10px;
+      background: #5dade2; color: #fff; font-size: 16px; font-weight: 600;
+      cursor: pointer; transition: background 0.15s; margin-top: 12px;
+    }
+    .btn:hover { background: #4a90d9; }
+    .btn:disabled { background: #2a4a6a; cursor: not-allowed; }
+    .progress { display: none; margin-top: 16px; }
+    .progress-bar {
+      height: 6px; background: #0f3460; border-radius: 3px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: #5dade2; border-radius: 3px;
+      transition: width 0.3s; width: 0%;
+    }
+    .progress-text { color: #8899aa; font-size: 12px; margin-top: 6px; }
+    .privacy-note {
+      margin-top: 20px; padding: 12px; background: rgba(93,173,226,0.1);
+      border-radius: 8px; font-size: 12px; color: #6699bb; line-height: 1.5;
+    }
+    .divider { border: none; border-top: 1px solid #1a3a5c; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <div class="setup-card">
+    <h1>Welcome to Whisp</h1>
+    <p class="subtitle">Choose a model to power your suggestions. Everything runs locally on your machine.</p>
+
+    <div class="section-label">Vision models (screenshot context)</div>
+    <div class="model-list">
+      <label class="model-option selected" data-model="moondream:1.8b">
+        <input type="radio" name="model" value="moondream:1.8b" checked>
+        <div>
+          <div class="model-header">
+            <span class="model-name">Moondream 1.8B</span>
+            <span class="badge badge-vision">Vision</span>
+            <span class="badge badge-recommended">Recommended</span>
+          </div>
+          <div class="model-stats">
+            <span>Download: ~1.1 GB</span>
+            <span>RAM: ~2 GB</span>
+          </div>
+          <div class="model-desc">Lightweight vision model. Sees your screen for context-aware suggestions.</div>
+        </div>
+      </label>
+      <label class="model-option" data-model="llava:7b">
+        <input type="radio" name="model" value="llava:7b">
+        <div>
+          <div class="model-header">
+            <span class="model-name">LLaVA 7B</span>
+            <span class="badge badge-vision">Vision</span>
+          </div>
+          <div class="model-stats">
+            <span>Download: ~4.7 GB</span>
+            <span>RAM: ~8 GB</span>
+          </div>
+          <div class="model-desc">High-quality vision + language. Best suggestions, needs more resources.</div>
+        </div>
+      </label>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-label">Text-only models (faster, lighter)</div>
+    <div class="model-list">
+      <label class="model-option" data-model="qwen3:0.6b">
+        <input type="radio" name="model" value="qwen3:0.6b">
+        <div>
+          <div class="model-header">
+            <span class="model-name">Qwen3 0.6B</span>
+            <span class="badge badge-text">Text only</span>
+          </div>
+          <div class="model-stats">
+            <span>Download: ~523 MB</span>
+            <span>RAM: ~1 GB</span>
+          </div>
+          <div class="model-desc">Fastest option. Text suggestions without screenshot context.</div>
+          <div class="vision-note">Screenshot feature disabled — suggestions based on typed text only</div>
+        </div>
+      </label>
+      <label class="model-option" data-model="qwen3:1.7b">
+        <input type="radio" name="model" value="qwen3:1.7b">
+        <div>
+          <div class="model-header">
+            <span class="model-name">Qwen3 1.7B</span>
+            <span class="badge badge-text">Text only</span>
+          </div>
+          <div class="model-stats">
+            <span>Download: ~1.1 GB</span>
+            <span>RAM: ~2 GB</span>
+          </div>
+          <div class="model-desc">Better text quality, still lightweight.</div>
+          <div class="vision-note">Screenshot feature disabled — suggestions based on typed text only</div>
+        </div>
+      </label>
+    </div>
+
+    <hr class="divider">
+
+    <div class="model-list">
+      <label class="model-option" data-model="custom">
+        <input type="radio" name="model" value="custom">
+        <div>
+          <div class="model-header">
+            <span class="model-name">Custom model</span>
+          </div>
+          <div class="model-desc">Enter any Ollama model name (advanced users)</div>
+        </div>
+      </label>
+    </div>
+
+    <input type="text" class="custom-input" id="customModel" placeholder="e.g. minicpm-v:8b, llama3:8b">
+
+    <button class="btn" id="startBtn" onclick="startSetup()">Get Started</button>
+
+    <div class="progress" id="progress">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">Setting up...</div>
+    </div>
+
+    <div class="privacy-note">
+      All processing happens locally. No data leaves your machine. You can change the model anytime in settings.
+    </div>
+  </div>
+
+  <script>
+    const options = document.querySelectorAll('.model-option');
+    const customInput = document.getElementById('customModel');
+
+    options.forEach(opt => {
+      opt.addEventListener('click', () => {
+        options.forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        opt.querySelector('input').checked = true;
+        customInput.style.display = opt.dataset.model === 'custom' ? 'block' : 'none';
+      });
+    });
+
+    async function startSetup() {
+      const selected = document.querySelector('input[name="model"]:checked').value;
+      const model = selected === 'custom' ? customInput.value.trim() : selected;
+
+      if (!model) { alert('Please enter a model name'); return; }
+
+      const btn = document.getElementById('startBtn');
+      const progress = document.getElementById('progress');
+      const progressFill = document.getElementById('progressFill');
+      const progressText = document.getElementById('progressText');
+
+      btn.disabled = true;
+      btn.textContent = 'Setting up...';
+      progress.style.display = 'block';
+
+      try {
+        const result = await window.__TAURI__.core.invoke('setup_model', {
+          request: { model }
+        });
+        progressFill.style.width = '100%';
+        progressText.textContent = 'Ready!';
+        btn.textContent = 'Done';
+        // TODO: close setup window, start daemon
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Retry';
+        progress.style.display = 'none';
+        alert('Setup failed: ' + err);
+      }
+    }
+  </script>
+</body>
+</html>
