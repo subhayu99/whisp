@@ -3,6 +3,12 @@ use image::DynamicImage;
 /// Captures screenshots of the active window for LLM context.
 pub struct ScreenCapture;
 
+impl Default for ScreenCapture {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ScreenCapture {
     pub fn new() -> Self {
         Self
