@@ -1,10 +1,10 @@
 mod commands;
 
+use std::sync::Arc;
+use tauri::Manager;
 use whisp_core::config;
 use whisp_core::llm::ollama::OllamaBackend;
 use whisp_core::llm::LlmBridge;
-use std::sync::Arc;
-use tauri::Manager;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
